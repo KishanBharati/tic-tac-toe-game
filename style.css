@@ -1,66 +1,88 @@
-/* Reset default spacing */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-/* Center content */
 body {
-    height: 100vh;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea, #764ba2);
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #1e272e;
-    font-family: Arial, sans-serif;
 }
 
-/* Main container */
 .container {
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    width: 320px;
     text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+h1 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#status {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #555;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.cell {
+    height: 90px;
+    background: #f1f3f6;
+    border-radius: 12px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cell:hover {
+    background: #dfe4ea;
+    transform: scale(1.05);
+}
+
+.cell.winner {
+    background: #2ed573;
     color: white;
 }
 
-/* Game board */
-.board {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    gap: 10px;
-    margin: 20px auto;
-}
-
-/* Individual cells */
-.cell {
-    width: 100px;
-    height: 100px;
-    background-color: #485460;
-    font-size: 2.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-/* Hover effect */
-.cell:hover {
-    background-color: #808e9b;
-}
-
-/* Reset button */
 button {
-    padding: 10px 20px;
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #667eea;
+    color: white;
     font-size: 1rem;
+    border-radius: 8px;
     cursor: pointer;
 }
 
-/* Mobile responsive */
-@media (max-width: 500px) {
-    .board {
-        grid-template-columns: repeat(3, 80px);
-    }
+button:hover {
+    background: #5a67d8;
+}
 
+@media (max-width: 400px) {
     .cell {
-        width: 80px;
-        height: 80px;
+        height: 75px;
+        font-size: 2rem;
     }
 }
