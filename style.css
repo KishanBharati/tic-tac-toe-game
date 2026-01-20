@@ -1,20 +1,23 @@
+/* Remove default margin & padding */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
 }
 
+/* Full screen gradient background */
 body {
     min-height: 100vh;
     background: linear-gradient(135deg, #667eea, #764ba2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex;                 /* Flexbox for centering */
+    justify-content: center;       /* Horizontal center */
+    align-items: center;           /* Vertical center */
+    font-family: 'Segoe UI', sans-serif;
 }
 
+/* Main card */
 .container {
-    background: #fff;
+    background: #ffffff;
     padding: 25px;
     border-radius: 15px;
     width: 320px;
@@ -22,11 +25,13 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.2);
 }
 
+/* Title style */
 h1 {
     margin-bottom: 10px;
     color: #333;
 }
 
+/* Game status text */
 #status {
     font-size: 1.1rem;
     margin-bottom: 15px;
@@ -34,12 +39,14 @@ h1 {
     color: #555;
 }
 
+/* Game board grid */
 .board {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
     gap: 10px;
 }
 
+/* Each cell */
 .cell {
     height: 90px;
     background: #f1f3f6;
@@ -47,23 +54,26 @@ h1 {
     font-size: 2.5rem;
     font-weight: bold;
     color: #444;
-    display: flex;
+    display: flex;                 /* Center content */
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s ease;     /* Smooth animation */
 }
 
+/* Hover effect */
 .cell:hover {
     background: #dfe4ea;
     transform: scale(1.05);
 }
 
+/* Highlight winning cells */
 .cell.winner {
     background: #2ed573;
     color: white;
 }
 
+/* Reset button */
 button {
     margin-top: 15px;
     width: 100%;
@@ -76,13 +86,5 @@ button {
     cursor: pointer;
 }
 
-button:hover {
-    background: #5a67d8;
-}
-
-@media (max-width: 400px) {
-    .cell {
-        height: 75px;
-        font-size: 2rem;
-    }
-}
+/* Button hover effect */
+button:hover
