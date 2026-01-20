@@ -87,4 +87,14 @@ button {
 }
 
 /* Button hover effect */
-button:hover
+button:hover {
+    background: #5a67d8;
+}
+
+/* Mobile responsive design */
+@media (max-width: 400px) {
+    .cell {
+        height: 75px;
+        font-size: 2rem;
+    }
+}
