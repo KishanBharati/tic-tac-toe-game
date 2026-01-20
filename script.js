@@ -7,85 +7,105 @@ const statusText = document.getElementById("status");
 // Select reset button
 const resetBtn = document.getElementById("reset");
 
-// Current player
+// Store current player (X or O)
 let currentPlayer = "X";
 
-// Game active flag
+// Flag to control game state
 let gameActive = true;
 
-// Store game state
+// Array to store board values
 let gameState = ["", "", "", "", "", "", "", "", ""];
 
-// Winning combinations
+// All possible winning combinations
 const winningConditions = [
-    [0,1,2], [3,4,5], [6,7,8],
-    [0,3,6], [1,4,7], [2,5,8],
-    [0,4,8], [2,4,6]
+    [0,1,2], [3,4,5], [6,7,8],   // Rows
+    [0,3,6], [1,4,7], [2,5,8],   // Columns
+    [0,4,8], [2,4,6]             // Diagonals
 ];
 
-// Handle cell click
+// Function runs when a cell is clicked
 function handleCellClick() {
-    const index = this.getAttribute("data-index");
 
-    // Prevent overwrite or play after game end
+    // Get index from clicked cell
+    const index = this.dataset.index;
+
+    // Stop if cell already filled or game over
     if (gameState[index] !== "" || !gameActive) return;
 
-    // Update game state
+    // Store player move in array
     gameState[index] = currentPlayer;
+
+    // Display player symbol on UI
     this.textContent = currentPlayer;
 
-    // Check result
+    // Check for win or tie
     checkResult();
 }
 
-// Check win or tie
+// Function to check game result
 function checkResult() {
-    let roundWon = false;
 
-    // Loop through win conditions
+    // Loop through all winning patterns
     for (let condition of winningConditions) {
+
+        // Destructure positions
         const [a, b, c] = condition;
 
+        // Check if same symbol exists in pattern
         if (
             gameState[a] &&
             gameState[a] === gameState[b] &&
             gameState[a] === gameState[c]
         ) {
-            roundWon = true;
-            break;
+            // Highlight winning cells
+            highlightWinner(condition);
+
+            // Show win message
+            statusText.textContent = `🎉 Player ${currentPlayer} Wins!`;
+
+            // Stop the game
+            gameActive = false;
+            return;
         }
     }
 
-    // If win
-    if (roundWon) {
-        statusText.textContent = `Player ${currentPlayer} Wins!`;
-        gameActive = false;
-        return;
-    }
-
-    // If tie
+    // Check tie (no empty cell)
     if (!gameState.includes("")) {
-        statusText.textContent = "It's a Tie!";
+        statusText.textContent = "🤝 It's a Tie!";
         gameActive = false;
         return;
     }
 
-    // Switch player
+    // Switch player turn
     currentPlayer = currentPlayer === "X" ? "O" : "X";
     statusText.textContent = `Player ${currentPlayer}'s Turn`;
 }
 
-// Reset game
-function resetGame() {
-    currentPlayer = "X";
-    gameActive = true;
-    gameState = ["", "", "", "", "", "", "", "", ""];
-    statusText.textContent = "Player X's Turn";
-
-    // Clear UI
-    cells.forEach(cell => cell.textContent = "");
+// Highlight winning cells
+function highlightWinner(combo) {
+    combo.forEach(index => {
+        cells[index].classList.add("winner");
+    });
 }
 
-// Add click events
+// Reset game to initial state
+function resetGame() {
+
+    currentPlayer = "X";
+    gameActive = true;
+    gameState.fill("");
+
+    statusText.textContent = "Player X's Turn";
+
+    // Clear board UI
+    cells.forEach(cell => {
+        cell.textContent = "";
+        cell.classList.remove("winner");
+    });
+}
+
+// Add click event to each cell
 cells.forEach(cell => cell.addEventListener("click", handleCellClick));
+
+// Add click event to reset button
 resetBtn.addEventListener("click", resetGame);
