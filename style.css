@@ -1,0 +1,66 @@
+/* Reset default spacing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Center content */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1e272e;
+    font-family: Arial, sans-serif;
+}
+
+/* Main container */
+.container {
+    text-align: center;
+    color: white;
+}
+
+/* Game board */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px;
+    margin: 20px auto;
+}
+
+/* Individual cells */
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #485460;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Hover effect */
+.cell:hover {
+    background-color: #808e9b;
+}
+
+/* Reset button */
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Mobile responsive */
+@media (max-width: 500px) {
+    .board {
+        grid-template-columns: repeat(3, 80px);
+    }
+
+    .cell {
+        width: 80px;
+        height: 80px;
+    }
+}
